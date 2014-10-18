@@ -1,16 +1,20 @@
-(function (Facade) {
+(function (root, factory) {
 
     'use strict';
 
-    function displayErrorMessage (msg) {
+    if (typeof define === 'function' && define.amd !== undefined) {
 
-        if (window.console !== undefined && window.console.error !== undefined) {
+        define(['facade', 'sat-js'], factory);
 
-            console.error('Facade.js SAT-js Plugin -', msg);
+    } else {
 
-        }
+        factory(Facade, SAT);
 
     }
+
+}(this, function (Facade, SAT) {
+
+    'use strict';
 
     var methods = {
 
@@ -145,16 +149,16 @@
 
     Facade.Entity.prototype.SAT = function (method) {
 
-        if (methods[method]) {
+        if (!methods[method]) {
 
-            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-
-        } else {
-
-            displayErrorMessage(method + ' is not a method specified in this plugin.');
+            console.error(method + ' is not a method specified in this plugin.');
 
         }
 
+        return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+
     };
 
-}(Facade));
+    return Facade;
+
+}));
