@@ -1,9 +1,9 @@
 /*global require, casper*/
 
-require('../libs/Facade.js/polyfills/requestAnimationFrame-polyfill');
-var Facade = require('../libs/Facade.js/facade.min');
-var SAT = require('../libs/sat-js/SAT.min');
-require('../facadejs-SAT');
+require('../Facade.js/polyfills/requestAnimationFrame-polyfill');
+var Facade = require('../Facade.js/facade.min');
+var SAT = require('./vendor/sat-js-0.5.0/SAT.min');
+require('./facadejs-SAT');
 
 casper.test.info('Collision Tests');
 
